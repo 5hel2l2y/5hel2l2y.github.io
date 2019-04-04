@@ -47,8 +47,7 @@
 
 		<!-- Scripts -->
 		<script>
-			// API from https://github.com/sterlingw/Nat-Geo-Photo-of-the-Day-API
-			httpGet("http://localhost:3000/api/dailyphoto");
+			httpGet("https://natgeo.herokuapp.com/api/dailyphoto");
 			
 			if ('addEventListener' in window) {
 				window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
