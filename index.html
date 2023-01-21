@@ -23,7 +23,7 @@
 					<span class="avatar"><img src="https://pbs.twimg.com/profile_images/1612273345772523520/kuV8eez8_400x400.jpg" alt="" width="122px"/></span>
 					<h1>Sherry Yang</h1>
 					<p>
-						Polyglot Programmer
+						Engineering Management
 						<br>
 					</p>
 				</header>
@@ -47,7 +47,7 @@
 
 		<!-- Scripts -->
 		<script>
-			httpGet("https://natgeo.herokuapp.com/api/dailyphoto");
+			httpGet("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY");
 			
 			if ('addEventListener' in window) {
 				window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
@@ -60,7 +60,7 @@
 			    xmlHttp.onreadystatechange = function() {
 				    if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
 				        var bgOfTheDay = JSON.parse(xmlHttp.responseText);
-				        document.body.style.backgroundImage = "url(" + bgOfTheDay.src + ")";
+				        document.body.style.backgroundImage = "url(" + bgOfTheDay.url + ")";
 				        document.body.style.backgroundSize = "cover";
 				    }else{
 				        return false;
