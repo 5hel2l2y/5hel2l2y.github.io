@@ -4,6 +4,8 @@ This is my version of AJ's Identity available in [HTML5UP](https://html5up.net/i
 
 My own API creation roadmap at [Nat Geo Photo of the Day API](https://github.com/5hel2l2y/Nat-Geo-Photo-of-the-Day-API), live at [Heroku](https://natgeo.herokuapp.com/api/dailyphoto)
 
+Update: Using [NASA open API](https://api.nasa.gov/) for background
+
 ## Additional Readme
 Please see [README.txt](README.txt)
 
