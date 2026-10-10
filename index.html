@@ -70,7 +70,7 @@
 		                var bgOfTheDay = Array.isArray(response) ? response[0] : response;
 		                
 		                // Extract image URL from the WordPress response structure
-		                var imageUrl = bgOfTheDay.url || bgOfTheDay.source_url;
+		                var imageUrl = bgOfTheDay.hdurl;
 		
 		                if (imageUrl) {
 		                    document.body.style.backgroundImage = "url(" + imageUrl + ")";
