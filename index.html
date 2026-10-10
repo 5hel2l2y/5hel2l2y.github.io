@@ -49,31 +49,47 @@
 
 		<!-- Scripts -->
 		<script>
-			httpGet("https://science.nasa.gov/wp-json/wp/v2/apod-basic/?api_key=DEMO_KEY");
-			
-			if ('addEventListener' in window) {
-				window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
-				document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
-			}
-
-			function httpGet(theUrl) {
-			    var xmlHttp = new XMLHttpRequest();
-			    xmlHttp.open("GET", theUrl, true);
-			    xmlHttp.onreadystatechange = function() {
-				    if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-				        var bgOfTheDay = JSON.parse(xmlHttp.responseText);
-				        document.body.style.backgroundImage = "url(" + bgOfTheDay.url + ")";
-				        document.body.style.backgroundSize = "cover";
-				    }else{
-				        return false;
-				    }
-				}
-			    xmlHttp.send();
-			}
-
-			function ViewSource() {
-				window.location = "view-source:" + window.location.href 
-			}
+		    // Updated NASA APOD WordPress endpoint
+		    httpGet("https://science.nasa.gov/wp-json/wp/v2/apod-basic/?api_key=DEMO_KEY");
+		    
+		    if ('addEventListener' in window) {
+		        window.addEventListener('load', function() { 
+		            document.body.className = document.body.className.replace(/\bis-loading\b/, ''); 
+		        });
+		        document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+		    }
+		
+		    function httpGet(theUrl) {
+		        var xmlHttp = new XMLHttpRequest();
+		        xmlHttp.open("GET", theUrl, true);
+		        xmlHttp.onreadystatechange = function() {
+		            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+		                var response = JSON.parse(xmlHttp.responseText);
+		                
+		                // Handle response format (WordPress REST API can return an array or single object)
+		                var bgOfTheDay = Array.isArray(response) ? response[0] : response;
+		                
+		                // Extract image URL from the WordPress response structure
+		                var imageUrl = bgOfTheDay.url || bgOfTheDay.source_url;
+		
+		                if (imageUrl) {
+		                    document.body.style.backgroundImage = "url(" + imageUrl + ")";
+		                    document.body.style.backgroundSize = "cover";
+		                    document.body.style.backgroundPosition = "center";
+		                    document.body.style.backgroundRepeat = "no-repeat";
+		                } else {
+		                    console.warn("Could not find a valid background image URL in the response.");
+		                }
+		            } else if (xmlHttp.readyState == 4) {
+		                return false;
+		            }
+		        };
+		        xmlHttp.send();
+		    }
+		
+		    function ViewSource() {
+		        window.location = "view-source:" + window.location.href;
+		    }
 		</script>
 	</body>
 </html>
